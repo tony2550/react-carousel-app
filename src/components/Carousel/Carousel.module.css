@@ -1,0 +1,29 @@
+/* .Container {
+  background-color: aquamarine;
+  color: green;
+  padding: 30px;
+} */
+
+.DisplayFrame {
+  touch-action: none;
+  width: 95vw;
+  height: calc(95vw * 0.5625);
+  max-height: 90vh;
+  max-width: calc(90vh * 1.78);
+  background-color: #eaebec;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+  z-index: 1;
+  caret-color: transparent;
+}
+
+.DisplayFrame::-webkit-scrollbar {
+  display: none;
+}
+
+.LeftArrow {
+}
+
+.RightArrow {
+}
