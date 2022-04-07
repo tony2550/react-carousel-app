@@ -3,10 +3,12 @@ import classes from './Carousel.module.css';
 
 const Carousel = () => {
   return (
-    <div className={classes.Container}>
-      <div className={classes.leftArrow}>❮</div>
-      <div className={classes.DisplayFrame}></div>
-      <div className={classes.rightArrow}>❯</div>
+    <div>
+      <div className={classes.Container}>
+        <div className={classes.LeftArrow}>❮</div>
+        <div className={classes.DisplayFrame}></div>
+        <div className={classes.RightArrow}>❯</div>
+      </div>
     </div>
   );
 };
