@@ -5,13 +5,15 @@ const widthSpan = 100;
 
 const Carousel = (props) => {
   const [sliderPosition, setSliderPosition] = useState(0);
-  const { children } = props;
+  const { children, infinite } = props;
 
   // 왼쪽 슬라이드
   const prevSliderHandler = () => {
     let newPosition = sliderPosition;
     if (newPosition > 0) {
       newPosition = newPosition - 1;
+    } else if (infinite) {
+      newPosition = children.length - 1;
     }
     translateFullSlides(newPosition);
     setSliderPosition(newPosition);
@@ -22,6 +24,8 @@ const Carousel = (props) => {
     let newPosition = sliderPosition;
     if (newPosition < children.length - 1) {
       newPosition = newPosition + 1;
+    } else if (infinite) {
+      newPosition = 0;
     }
     translateFullSlides(newPosition);
     setSliderPosition(newPosition);

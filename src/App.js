@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <h3 style={{ textAlign: 'center' }}>Carousel app</h3>
-      <Carousel>
+      <Carousel infinite>
         <img
           src="https://images.unsplash.com/photo-1594142404563-64cccaf5a10f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
           alt="profile"
