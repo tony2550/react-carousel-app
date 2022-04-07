@@ -72,6 +72,7 @@
   width: 100%;
   display: inline-block;
   vertical-align: top;
+  transition: all 500ms linear;
 }
 
 .CarouselItem img {
