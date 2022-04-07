@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react';
+import React, { Children, useState, useEffect } from 'react';
 import classes from './Carousel.module.css';
 
 const widthSpan = 100;
@@ -31,6 +31,45 @@ const Carousel = (props) => {
     setSliderPosition(newPosition);
   };
 
+  const jumpToSliderHandler = (id) => {
+    translateFullSlides(id);
+    setSliderPosition(id);
+  };
+
+  // 5. 에서 추가함
+  const prevClickHandler = () => {
+    prevSliderHandler();
+  };
+  // 5. 에서 추가함
+  const nextClickHandler = () => {
+    nextSliderHandler();
+  };
+
+  const keyPressHandler = (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      e.stopPropagation();
+      prevSliderHandler();
+      return;
+    }
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      e.stopPropagation();
+      nextSliderHandler();
+      return;
+    }
+    if (49 <= e.keyCode && e.keyCode <= 57) {
+      const arrayPos = e.keyCode - 49;
+      if (arrayPos < children.length) {
+        jumpToSliderHandler(arrayPos);
+      }
+      return;
+    }
+    if (e.keyCode === 48) {
+      if (children.length >= 10) jumpToSliderHandler(9);
+    }
+  };
+
   const translateFullSlides = (newPosition) => {
     let toTranslate = -widthSpan * newPosition;
     for (let i = 0; i < children.length; i++) {
@@ -45,14 +84,21 @@ const Carousel = (props) => {
     </div>
   ));
 
+  useEffect(() => {
+    window.addEventListener('keydown', keyPressHandler);
+    return () => {
+      window.removeEventListener('keydown', keyPressHandler);
+    };
+  });
+
   return (
     <div>
       <div className={classes.Container}>
-        <div className={classes.LeftArrow} onClick={prevSliderHandler}>
+        <div className={classes.LeftArrow} onClick={prevClickHandler}>
           ❮
         </div>
         <div className={classes.DisplayFrame}>{displayItems}</div>
-        <div className={classes.RightArrow} onClick={nextSliderHandler}>
+        <div className={classes.RightArrow} onClick={nextClickHandler}>
           ❯
         </div>
       </div>
