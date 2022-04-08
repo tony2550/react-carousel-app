@@ -84,6 +84,13 @@ const Carousel = (props) => {
     </div>
   ));
 
+  const positionIndicators = Children.map(children, (child, index) => (
+    <div
+      className={sliderPosition === index ? classes.PositionIndicator.concat(` ` + classes.CurrentPosition) : classes.PositionIndicator}
+      onClick={() => jumpToSliderHandler(index)}
+    ></div>
+  ));
+
   useEffect(() => {
     window.addEventListener('keydown', keyPressHandler);
     return () => {
@@ -102,6 +109,7 @@ const Carousel = (props) => {
           ❯
         </div>
       </div>
+      <div className={classes.Navigation}>{positionIndicators}</div>
     </div>
   );
 };
