@@ -4,7 +4,7 @@ import Carousel from './components/Carousel/Carousel';
 import InfiniteCarousel from './components/InfinteCarousel/InfinteCarousel';
 
 function App() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   return (
     <div>
@@ -35,11 +35,11 @@ function App() {
       ) : (
         <div>
           <InfiniteCarousel>
-            <img src="img/1.jpg" alt="profile" style={{ width: '100%', height: '100%' }} />
-            <img src="img/2.jpg" alt="profile" style={{ width: '100%', height: '100%' }} />
-            <img src="img/3.jpg" alt="profile" style={{ width: '100%', height: '100%' }} />
-            <img src="img/4.jpg" alt="profile" style={{ width: '100%', height: '100%' }} />
-            <img src="img/5.jpg" alt="profile" style={{ width: '100%', height: '100%' }} />
+            <img src="img/1.jpg" alt="profile" />
+            <img src="img/2.jpg" alt="profile" />
+            <img src="img/3.jpg" alt="profile" />
+            <img src="img/4.jpg" alt="profile" />
+            <img src="img/5.jpg" alt="profile" />
           </InfiniteCarousel>
         </div>
       )}

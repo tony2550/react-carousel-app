@@ -16,6 +16,42 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: center;
+}
+
+.Slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.Slide img {
+  height: 100%;
+  max-width: 100%;
+  background-color: none;
+}
+
+.Btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: cadetblue;
+  color: aqua;
+  font-size: 2rem;
+  border-width: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.BtnLeft {
+  left: 0;
+}
+
+.BtnRight {
+  right: 0;
 }
 
 @media (max-width: 600px) {
