@@ -1,10 +1,10 @@
 .DisplayFrame {
   touch-action: none;
   border-radius: 10px;
-  width: 95vw;
-  height: calc(95vw * 0.5625);
-  max-height: 88vh;
-  max-width: calc(90vh * 1.78);
+  width: 93vw;
+  height: calc(93vw * 0.5625);
+  max-height: 84vh;
+  max-width: calc(96vh * 1.78);
   margin: auto;
   text-align: center;
   background-color: #eaebec;
@@ -74,7 +74,11 @@
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  transition: all 500ms linear;
+  transition: all 500ms linear; /* 애니메이션 효과 추가 */
+}
+
+.FastAnimation {
+  transition: all 50ms linear;
 }
 
 .CarouselItem img {

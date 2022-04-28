@@ -5,6 +5,11 @@ const widthSpan = 100;
 
 const Carousel = (props) => {
   const [sliderPosition, setSliderPosition] = useState(0);
+  const [touchStartPosition, setTouchStartPosition] = useState(0);
+  const [touchEndPosition, setTouchEndPosition] = useState(0);
+  const [touched, setTouched] = useState(false);
+  const [swiped, setSwiped] = useState(false);
+
   const { children, infinite } = props;
 
   // 왼쪽 슬라이드
@@ -70,6 +75,64 @@ const Carousel = (props) => {
     }
   };
 
+  // 슬라이드 속도 조절
+  const speedUpAnimation = () => {
+    for (let i = 0; i < children.length; i++) {
+      let elem = document.getElementById('carouselitem' + i);
+      elem.classList.add(classes.FastAnimation);
+    }
+  };
+
+  const slowDownAnimation = () => {
+    for (let i = 0; i < children.length; i++) {
+      let elem = document.getElementById('carouselitem' + i);
+      elem.classList.remove(classes.FastAnimation);
+    }
+  };
+
+  const touchStartHandler = (e) => {
+    speedUpAnimation();
+    setTouchStartPosition(e.targetTouches[0].clientX); // 터치한 포지션
+    setTouchEndPosition(e.targetTouches[0].clientX);
+    setTouched(true);
+  };
+
+  const touchMoveHandler = (e) => {
+    setTouchEndPosition(e.targetTouches[0].clientX);
+    const frameWidth = document.getElementById('DisplayFrame').offsetWidth; // 프레임 전체 길이 계산 식
+    const translateDistance = ((touchEndPosition - touchStartPosition) / frameWidth) * 100; // 스와이프한 거리
+    translatePartialSlides(translateDistance);
+    if (touched === true) {
+      setSwiped(true);
+    }
+  };
+
+  const touchEndHandler = (e) => {
+    if (swiped) {
+      slowDownAnimation();
+      if (touchStartPosition - touchEndPosition > 75) {
+        // 다음사진 영역이 75초과되도록 스와이프 하면~
+        nextSliderHandler();
+      } else if (touchStartPosition - touchEndPosition < -75) {
+        // 전사진 영역이 75초과되도록 스와이프 하면~
+        prevSliderHandler();
+      } else {
+        jumpToSliderHandler(sliderPosition);
+      }
+    }
+    setTouched(false); // 터치해제
+    setSwiped(false); // 스와이프해제
+  };
+
+  const translatePartialSlides = (toTranslate) => {
+    let currentTranslation = -sliderPosition * widthSpan;
+    let totalTranslation = currentTranslation + toTranslate;
+    for (let i = 0; i < children.length; i++) {
+      let elem = document.getElementById('carouselitem' + i);
+      elem.style.transform = 'translateX(' + totalTranslation + '%)';
+    }
+  };
+
   const translateFullSlides = (newPosition) => {
     let toTranslate = -widthSpan * newPosition;
     for (let i = 0; i < children.length; i++) {
@@ -104,7 +167,15 @@ const Carousel = (props) => {
         <div className={classes.LeftArrow} onClick={prevClickHandler}>
           ❮
         </div>
-        <div className={classes.DisplayFrame}>{displayItems}</div>
+        <div
+          className={classes.DisplayFrame}
+          id="DisplayFrame"
+          onTouchStart={(e) => touchStartHandler(e)}
+          onTouchMove={(e) => touchMoveHandler(e)}
+          onTouchEnd={(e) => touchEndHandler(e)}
+        >
+          {displayItems}
+        </div>
         <div className={classes.RightArrow} onClick={nextClickHandler}>
           ❯
         </div>

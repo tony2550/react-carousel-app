@@ -28,6 +28,29 @@
   color: #61dafb;
 }
 
+.varousel-app__navtap {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.carousel-app__navtap > ul {
+  display: flex;
+  margin-left: 7vw;
+  gap: 1vw;
+  list-style: none;
+}
+
+.carousel-app__navtap > ul > li {
+  list-style: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.carousel-app__navtap > ul > li:hover {
+  color: cadetblue;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
